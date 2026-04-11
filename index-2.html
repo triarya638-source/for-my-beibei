@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff1744 0%, #ff5252 25%, #ff80ab 50%, #ffb3ba 75%, #ffc0cb 100%);
+            animation: gradientShift 6s ease infinite;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background: linear-gradient(135deg, #ff1744 0%, #ff5252 25%, #ff80ab 50%, #ffb3ba 75%, #ffc0cb 100%);
+            }
+            50% {
+                background: linear-gradient(135deg, #ff80ab 0%, #ffb3ba 25%, #ffc0cb 50%, #ff1744 75%, #ff5252 100%);
+            }
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            75% {
+                transform: scale(1.1);
+            }
+        }
+
+        h1 {
+            color: #ff1744;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .special-message {
+            color: #ff1744;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            min-height: 40px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff1744, #ff5252);
+            color: white;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .yes-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 23, 68, 0.4);
+        }
+
+        .yes-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .maybe-btn {
+            background: #f5f5f5;
+            color: #ff1744;
+            flex: 1;
+            min-width: 120px;
+            border: 2px solid #ff1744;
+        }
+
+        .maybe-btn:hover {
+            background: #ffebee;
+            transform: translateY(-3px);
+        }
+
+        .maybe-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Floating hearts background */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .float-heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.6;
+            animation: float 6s infinite ease-in;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                padding: 30px 20px;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+
+            .heart {
+                font-size: 60px;
+            }
+
+            .button-group {
+                gap: 10px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .message {
+                font-size: 0.95rem;
+            }
+
+            .heart {
+                font-size: 50px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <div class="container">
+        <div class="card">
+            <div class="heart">❤️</div>
+            <h1>Happy Valentine's Day</h1>
+            <p class="message">
+                This is a special day to celebrate love and affection. Whether it's for someone special or just spreading joy, let this card bring a smile to your face. 💕
+            </p>
+            <div class="special-message" id="specialMessage"></div>
+            <div class="button-group">
+                <button class="yes-btn" onclick="handleYes()">Yes ❤️</button>
+                <button class="maybe-btn" onclick="handleMaybe()">Maybe Later 💭</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts in background
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['❤️', '💕', '💖', '💗', '💝'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'float-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                container.appendChild(heart);
+            }
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#ff1744', '#ff5252', '#ff80ab', '#ffb3ba', '#ffc0cb'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animation = `confettiFall ${2 + Math.random() * 1}s ease-in forwards`;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // Handle Yes button
+        function handleYes() {
+            document.getElementById('specialMessage').textContent = '🎉 That\'s wonderful! Enjoy this special day! 🎉';
+            createConfetti();
+            
+            // Add some celebration animation
+            document.querySelector('.card').style.animation = 'none';
+            setTimeout(() => {
+                document.querySelector('.card').style.animation = 'slideUp 0.8s ease-out';
+            }, 10);
+        }
+
+        // Handle Maybe button
+        function handleMaybe() {
+            document.getElementById('specialMessage').textContent = '💭 No worries! Just remember, you\'re loved! 💕';
+        }
+
+        // Initialize floating hearts on page load
+        window.addEventListener('load', createFloatingHearts);
+    </script>
+</body>
+</html>
